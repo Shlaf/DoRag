@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   handleInputClick = (input) => {
-    this.setState({input})
+    this.setState({input: this.state.input+input})
   }
 
   render() {
