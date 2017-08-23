@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-
+import Addition from "./functions/addition";
+import Subtract from "./functions/subtract";
+import Multiply from "./functions/multiply";
+import Divide from "./functions/divide";
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>  React</h2>
+      <main>
+      <div className="calculatorz">
+        <form>
+          <input type="text" name="value" id="value"/>
+        </form>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </main> 
     );
   }
 }
