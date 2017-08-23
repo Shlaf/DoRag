@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import addition from "./functions/addition"
-import subtract from "./functions/subtract"
-import multiply from "./functions/multiply"
-import divide from "./functions/divide"
+import addition from "./functions/addition";
+import subtract from "./functions/subtract";
+import multiply from "./functions/multiply";
+import divide from "./functions/divide";
 import './App.css';
 
 class App extends Component {
