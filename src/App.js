@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   handleInputClick = (input) => {
-<<<<<<< HEAD
 
     if (typeof input === "number") {
 
@@ -108,11 +107,6 @@ class App extends Component {
           break;
       };
     }
-
-=======
-    this.setState({input: this.state.input+input})
->>>>>>> 7b2a0a279d858269770b3b02cce75142982fb4a2
-  }
 
   render() {
     return (
