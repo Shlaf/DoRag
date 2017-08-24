@@ -55,6 +55,9 @@ class App extends Component {
     } else {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
+      if (input !== this.state.math) {
+        this.setState({firstEntry: true});
+      }
       this.handelMath(input);
     }
   }
@@ -107,6 +110,7 @@ class App extends Component {
           break;
       };
     }
+  }
 
   render() {
     return (
