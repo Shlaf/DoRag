@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Button from "./components/button";
 import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
-// import Multiply from "./functions/multiply";
-// import Divide from "./functions/divide";
+import Multiply from "./functions/multiply";
+import Divide from "./functions/divide";
 
 import './App.css';
 
@@ -23,7 +23,11 @@ class App extends Component {
 
   handleInputClick = (input) => {
 
-    if (typeof input === "number") {
+    if (typeof input === "number" || input === ".") {
+
+      if (input === "," && this.state.input.includes(".")) {
+        return
+      }
 
       if (this.state.resetNext) {
         // reset input if resetNext = true
@@ -32,7 +36,6 @@ class App extends Component {
         // Concatenate input string
         this.setState({input : this.state.input + input.toString()});
       };
-     
 
     } else if (input === "c") {
       // If user input C
@@ -40,13 +43,7 @@ class App extends Component {
 
     } else if (input === "=") {
       // If user input =
-      this.handelMath(this.state.math);
-      this.setState({
-        firstEntry: true,
-        sum: null,
-        math: "=",
-        resetNext: true
-      });
+      this.handelEqual();
 
     } else if (input === "<") {
       // If user input < (backspace)
@@ -55,10 +52,15 @@ class App extends Component {
     } else {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
-      if (input !== this.state.math) {
-        this.setState({firstEntry: true});
+
+      if (input !== this.state.math && this.state.math && this.state.math !== "=") {
+        // If the user switch between +, -, *, /
+        this.handelMathSwitch(input);
+
+      } else {
+        this.handelMath(input);
       }
-      this.handelMath(input);
+
     }
   }
 
@@ -82,9 +84,31 @@ class App extends Component {
     this.setState({input: this.state.input.slice(0, -1)});
   }
 
-  handelMath(input) {
+  // ---------------------
+  // Handel math and reset state with sum in input
+  // ---------------------
+  handelEqual() {
+    this.handelMath(this.state.math);
+    this.setState({
+      firstEntry: true,
+      math: "=",
+      resetNext: true,
+      sum: null
+    });
+  }
 
+  handelMathSwitch(input) {
+    this.handelMath(this.state.math);
+    this.setState({
+      firstEntry: false,
+      math: input,
+      resetNext: true
+    });
+  }
+
+  handelMath(input) {
     if (this.state.firstEntry) {
+      console.log("move only");
       this.setState({
         sum: this.state.input,
         math: input,
@@ -106,6 +130,20 @@ class App extends Component {
             math: "-"
           });
           break;
+        case "*":
+          this.setState({
+            input: Multiply(this.state.sum, this.state.input).toString(),
+            sum: Multiply(this.state.sum, this.state.input),
+            math: "*"
+          });
+          break;
+        case "/":
+          this.setState({
+            input: Divide(this.state.sum, this.state.input).toString(),
+            sum: Divide(this.state.sum, this.state.input),
+            math: "/"
+          });
+          break;
         default:
           break;
       };
@@ -120,7 +158,7 @@ class App extends Component {
           <input type="text" name="value" id="value" value={this.state.input}/>
         </form>
         <div>
-          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, "(-)", "+", "-", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick}>{int}</Button>)}
+          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick}>{int}</Button>)}
         </div>
         </div>
       </main> 
