@@ -21,21 +21,32 @@ class App extends Component {
     };
   }
 
+  // Run when app is loaded
+  componentWillMount() {
+    this.getLocalStorage();
+  }
+
+
   handleInputClick = (input) => {
 
-    if (typeof input === "number" || input === ".") {
-
-      if (input === "," && this.state.input.includes(".")) {
-        return
-      }
+    if (typeof input === "number") {
 
       if (this.state.resetNext) {
         // reset input if resetNext = true
         this.setState({input: input.toString(), resetNext: false});
       } else {
+
         // Concatenate input string
         this.setState({input : this.state.input + input.toString()});
       };
+
+    } else if (input === "(-)") {
+      // If user input negative (-)
+      this.handelNegative();
+
+    } else if (input === ".") {
+      // If user input negative (-)
+      this.handelComma();
 
     } else if (input === "c") {
       // If user input C
@@ -61,6 +72,32 @@ class App extends Component {
         this.handelMath(input);
       }
 
+    }
+  }
+
+  // ---------------------
+  // Handel negative input, only allow one minus key
+  // ---------------------
+  handelNegative() {
+    if (this.state.resetNext) {
+      // reset input if resetNext = true
+      this.setState({input: "-", resetNext: false});
+    } else if (this.state.input.includes("-")) {
+      return
+    } else {
+        this.setState({input: "-" + this.state.input});
+    };
+  }
+
+  // ---------------------
+  // Handel comma input, only allow one comma key
+  // ---------------------
+  handelComma() {
+    if (this.state.resetNext || this.state.input === "") {
+      // reset input if resetNext = true
+      this.setState({input: "0.", resetNext: false});
+    } else {
+      this.setState({input: this.state.input + "."});
     }
   }
 
@@ -110,6 +147,22 @@ class App extends Component {
   }
 
   // ---------------------
+  // Save state to localStorege
+  // ---------------------
+  postLocalStorage() {
+    const jsonString = JSON.stringify(this.state);
+    localStorage.setItem('cal', jsonString);
+  }
+
+  // ---------------------
+  // Lode state from localStorege
+  // ---------------------
+  getLocalStorage() {
+    const savedState = JSON.parse(localStorage.getItem('cal'));
+    this.setState(savedState);
+  }
+
+  // ---------------------
   // Handel all math, set new state
   // ---------------------
   handelMath(input) {
@@ -156,6 +209,7 @@ class App extends Component {
 
   // React, render to DOM
   render() {
+    this.postLocalStorage();
     return (
       <main>
       <div className="calculatorz">
@@ -163,7 +217,7 @@ class App extends Component {
           <input type="text" name="value" id="value" value={this.state.input}/>
         </form>
         <div>
-          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick}>{int}</Button>)}
+          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, "(-)", ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick}>{int}</Button>)}
         </div>
         </div>
       </main> 
