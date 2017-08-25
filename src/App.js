@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Reset the state, clear cal
+  // Reset state to original
   // ---------------------
   handlClear() {
     this.setState({
@@ -85,7 +85,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel math and reset state with sum in input
+  // Handel equal: handel math, set new state
   // ---------------------
   handelEqual() {
     this.handelMath(this.state.math);
@@ -97,6 +97,9 @@ class App extends Component {
     });
   }
 
+  // ---------------------
+  // Handel math switch: handel math and set new state
+  // ---------------------
   handelMathSwitch(input) {
     this.handelMath(this.state.math);
     this.setState({
@@ -106,9 +109,12 @@ class App extends Component {
     });
   }
 
+  // ---------------------
+  // Handel all math, set new state
+  // ---------------------
   handelMath(input) {
     if (this.state.firstEntry) {
-      console.log("move only");
+      // This only moves the input to state.sum
       this.setState({
         sum: this.state.input,
         math: input,
@@ -144,12 +150,11 @@ class App extends Component {
             math: "/"
           });
           break;
-        default:
-          break;
       };
     }
   }
 
+  // React, render to DOM
   render() {
     return (
       <main>
