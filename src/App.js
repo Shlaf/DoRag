@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
+// Components
 import Button from "./components/button";
+
+// Functions
 import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
@@ -27,7 +31,7 @@ class App extends Component {
   }
 
 
-  handleInputClick = (input) => {
+  handleInputClick(input) {
 
     if (typeof input === "number") {
 
@@ -38,7 +42,7 @@ class App extends Component {
 
         // Concatenate input string
         this.setState({input : this.state.input + input.toString()});
-      };
+      }
 
     } else if (input === "(-)") {
       // If user input negative (-)
@@ -50,7 +54,7 @@ class App extends Component {
 
     } else if (input === "c") {
       // If user input C
-      this.handlClear();
+      this.handelClear();
 
     } else if (input === "=") {
       // If user input =
@@ -58,7 +62,7 @@ class App extends Component {
 
     } else if (input === "<") {
       // If user input < (backspace)
-      this.handlBackspace();
+      this.handelBackspace();
 
     } else {
       // If user input +, -, *, /...
@@ -83,10 +87,10 @@ class App extends Component {
       // reset input if resetNext = true
       this.setState({input: "-", resetNext: false});
     } else if (this.state.input.includes("-")) {
-      return
+      return;
     } else {
         this.setState({input: "-" + this.state.input});
-    };
+    }
   }
 
   // ---------------------
@@ -104,7 +108,7 @@ class App extends Component {
   // ---------------------
   // Reset state to original
   // ---------------------
-  handlClear() {
+  handelClear() {
     this.setState({
       input: "",
       math: null,
@@ -117,7 +121,7 @@ class App extends Component {
   // ---------------------
   // Delete the last number in string, backspace
   // ---------------------
-  handlBackspace() {
+  handelBackspace() {
     this.setState({input: this.state.input.slice(0, -1)});
   }
 
@@ -147,7 +151,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Save state to localStorege
+  // Save state to localStorage
   // ---------------------
   postLocalStorage() {
     const jsonString = JSON.stringify(this.state);
@@ -155,7 +159,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Lode state from localStorege
+  // Lode state from localStorage
   // ---------------------
   getLocalStorage() {
     const savedState = JSON.parse(localStorage.getItem('cal'));
@@ -203,7 +207,9 @@ class App extends Component {
             math: "/"
           });
           break;
-      };
+        default:
+          break;
+      }
     }
   }
 
@@ -212,12 +218,12 @@ class App extends Component {
     this.postLocalStorage();
     return (
       <main>
-      <div className="calculatorz">
+      <div className="calculator">
         <form>
           <input type="text" name="value" id="value" value={this.state.input}/>
         </form>
         <div>
-          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, "(-)", ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick}>{int}</Button>)}
+          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, "(-)", ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick.bind(this)}>{int}</Button>)}
         </div>
         </div>
       </main> 
