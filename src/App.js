@@ -10,6 +10,7 @@ import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
 
 import './App.css';
+import './Color.css';
 
 class App extends Component {
 
@@ -21,13 +22,16 @@ class App extends Component {
       math: null,
       sum: null,
       resetNext: false,
-      firstEntry: true
+      firstEntry: true,
+      theme: "red",
     };
+
+    this.buttons = ["C", "(-)", "<", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   }
 
   // Run when app is loaded
   componentWillMount() {
-    this.getLocalStorage();
+    // this.getLocalStorage();
   }
 
 
@@ -52,7 +56,7 @@ class App extends Component {
       // If user input negative (-)
       this.handelComma();
 
-    } else if (input === "c") {
+    } else if (input === "C" || input.toUpperCase() === "C") {
       // If user input C
       this.handelClear();
 
@@ -114,7 +118,7 @@ class App extends Component {
       math: null,
       sum: null,
       resetNext: false,
-      firstEntry: true
+      firstEntry: true,
     });
   }
 
@@ -134,7 +138,7 @@ class App extends Component {
       firstEntry: true,
       math: "=",
       resetNext: true,
-      sum: null
+      sum: null,
     });
   }
 
@@ -155,14 +159,14 @@ class App extends Component {
   // ---------------------
   postLocalStorage() {
     const jsonString = JSON.stringify(this.state);
-    localStorage.setItem('cal', jsonString);
+    localStorage.setItem('calc', jsonString);
   }
 
   // ---------------------
   // Lode state from localStorage
   // ---------------------
   getLocalStorage() {
-    const savedState = JSON.parse(localStorage.getItem('cal'));
+    const savedState = JSON.parse(localStorage.getItem('calc'));
     this.setState(savedState);
   }
 
@@ -175,7 +179,7 @@ class App extends Component {
       this.setState({
         sum: this.state.input,
         math: input,
-        firstEntry: false
+        firstEntry: false,
       });
     } else {
       switch(input) {
@@ -183,7 +187,7 @@ class App extends Component {
           this.setState({
             input: Addition(this.state.sum, this.state.input).toString(),
             sum: Addition(this.state.sum, this.state.input),
-            math: "+"
+            math: "+",
           });
           break;
         case "-":
@@ -213,18 +217,31 @@ class App extends Component {
     }
   }
 
+  handelChangeTheme() {
+    const newTheme = this.state.theme === "red" ? "blue" : "red";
+    this.setState({theme: newTheme});
+  }
+
   // React, render to DOM
   render() {
-    this.postLocalStorage();
+    // this.postLocalStorage();
     return (
       <main>
-      <div className="calculator">
-        <form>
-          <input type="text" name="value" id="value" value={this.state.input}/>
-        </form>
-        <div>
-          {[1, 2, 3, 4, 5, 6, 7 ,8, 9, 0, "(-)", ".", "+", "-", "*", "/", "c", "=", "<"].map((int) => <Button key={int} onClick={this.handleInputClick.bind(this)}>{int}</Button>)}
-        </div>
+        <div className={`calculator ${this.state.theme}`}>
+          <div className="top">
+            <button className="themes" onClick={() => this.handelChangeTheme()}>∞</button>
+            <div></div>
+            <h1>calc</h1>
+          </div>
+          <div className="input">
+            <span>{this.state.input ? this.state.input : 0}</span>
+          </div>
+          {/* <div className="history">
+            <span>{this.handelHistory()}</span>
+          </div> */}
+          <div className="button-wrapper">
+            {this.buttons.map((int) => <Button key={int} onClick={this.handleInputClick.bind(this)} math={this.state.math}>{int}</Button>)}
+          </div>
         </div>
       </main> 
     );
