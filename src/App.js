@@ -163,7 +163,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Lode state from localStorage
+  // Load state from localStorage
   // ---------------------
   getLocalStorage() {
     const savedState = JSON.parse(localStorage.getItem('calc'));
@@ -171,7 +171,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel all math, set new state
+  // Handle all math, set new state
   // ---------------------
   handelMath(input) {
     if (this.state.firstEntry) {
