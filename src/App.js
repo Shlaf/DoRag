@@ -9,10 +9,8 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-import Rotation from 'react-rotation'
 
-
-
+// CSS
 import './App.css';
 import './Color.css';
 
@@ -27,7 +25,7 @@ class App extends Component {
       theme: "red",
     };
 
-    buttons = ["%", "^", "<", "C", "e", "sin","π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+    buttons = ["%", "^", "<", "C", "e", "sinh", "cosh", "π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   
 
   // Run when app is loaded
@@ -69,6 +67,14 @@ class App extends Component {
       // If user input < (backspace)
       this.handelBackspace();
 
+    } else if (input === "π") {
+      // If user input < (π)
+      this.setState({input: Math.PI.toString()});
+
+    } else if (input === "e") {
+      // If user input < (E)
+      this.setState({input: Math.E.toString()});
+      
     } else if (this.state.input !== "") {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
@@ -174,10 +180,14 @@ class App extends Component {
   // Change font size
   // ---------------------
   shrinkFont = () =>{
-    if(this.state.input.length < 7){
+    if(this.state.input.length < 7) {
       return 4;
-  }else{
+  } else {
+      if (this.state.input.length === 8) {
+        return 3;
+      } else if (this.state.input.length > 9) {
         return 2;
+      }
   }
 }
 
