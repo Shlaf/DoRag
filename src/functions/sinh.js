@@ -1,1 +1,1 @@
-export default function sinh (n1) {return MATH.sinh(n1)};
+export default function sinh (n1) {return Math.sinh(n1)};

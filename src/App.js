@@ -27,9 +27,8 @@ class App extends Component {
       theme: "red",
     };
 
-    buttons = ["C", "(-)", "<", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+    buttons = ["%", "^", "<", "C", "e", "sin","π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   
-
 
   // Run when app is loaded
   componentWillMount() {
@@ -176,6 +175,17 @@ class App extends Component {
     const jsonString = JSON.stringify(this.state);
     localStorage.setItem('calc', jsonString);
   }
+
+  // ---------------------
+  // Change font size
+  // ---------------------
+  shrinkFont = () =>{
+    if(this.state.input.length < 7){
+      return 4;
+  }else{
+        return 2;
+  }
+}
 
   // ---------------------
   // Load state from localStorage
