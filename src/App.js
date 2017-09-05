@@ -98,7 +98,13 @@ class App extends Component {
         this.setState({input: this.state.input === "" ? this.state.input : "-" + this.state.input});
     }
   }
-
+  shrinkFont = () =>{
+    if(this.state.input.length < 7){
+      return 4;
+  }else{
+        return 2;
+  }
+}
   // ---------------------
   // Handel comma input, only allow one comma key
   // ---------------------
@@ -243,7 +249,7 @@ class App extends Component {
             <h1>calc</h1>
           </div>
           <div className={`input ${this.state.whatevz ? "animationz" : ""}`}>
-            <span>{this.state.input ? this.state.input : 0}</span>
+            <span style={{fontSize: `${this.shrinkFont()}rem`}}>{this.state.input ? this.state.input : 0}</span>
           </div>
           {/* <div className="history">
             <span>{this.handelHistory()}</span>
