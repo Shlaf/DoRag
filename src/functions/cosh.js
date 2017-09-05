@@ -1,1 +1,1 @@
-export default function cosh(n1) {return MATH.cosh(n1)};
+export default function cosh(n1) {return Math.cosh(n1)};
