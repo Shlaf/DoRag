@@ -19,7 +19,7 @@ import './Color.css';
 class App extends Component {
 
   state = {
-      input: "0",
+      input: "",
       math: null,
       sum: null,
       resetNext: false,
@@ -33,7 +33,7 @@ class App extends Component {
 
   // Run when app is loaded
   componentWillMount() {
-    // this.getLocalStorage();
+    this.getLocalStorage();
   }
 
 
@@ -46,7 +46,6 @@ class App extends Component {
         // reset input if resetNext = true
         this.setState({input: input.toString(), resetNext: false});
       } else {
-
         // Concatenate input string
         this.setState({input : this.state.input === "" ?  input.toString() : this.state.input + input.toString()});
       }
@@ -71,7 +70,7 @@ class App extends Component {
       // If user input < (backspace)
       this.handelBackspace();
 
-    } else {
+    } else if (this.state.input !== "") {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
 
@@ -96,7 +95,7 @@ class App extends Component {
     } else if (this.state.input.includes("-")) {
       return;
     } else {
-        this.setState({input: "-" + this.state.input});
+        this.setState({input: this.state.input === "" ? this.state.input : "-" + this.state.input});
     }
   }
 
@@ -107,10 +106,8 @@ class App extends Component {
     if (this.state.resetNext || this.state.input === "") {
       // reset input if resetNext = true
       this.setState({input: "0.", resetNext: false});
-    } else {
-      var reg = new RegExp("[.]");
-      reg= reg.test(this.state.input);
-      this.setState({input: (reg) ? this.state.input.toString() : this.state.input + "."});
+    } else if (!this.state.input.includes(".")) {
+      this.setState({input: this.state.input + "."});
     }
   }
 
@@ -230,7 +227,7 @@ class App extends Component {
 
   // React, render to DOM
   render() {
-    // this.postLocalStorage();
+    this.postLocalStorage();
     return (
       <main>
         <div className={`calculator ${this.state.theme}`}>
