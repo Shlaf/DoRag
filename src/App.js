@@ -8,7 +8,7 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-import Rotation from 'react-rotation'
+
 
 
 
