@@ -9,7 +9,6 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-import Rotation from 'react-rotation';
 import sinh from "./functions/sinh";
 import cosh from "./functions/cosh";
 import expo from "./functions/expo";
@@ -81,7 +80,15 @@ class App extends Component {
       // If user input < (E)
       this.setState({input: Math.E.toString()});
 
-    } else if (input === "%") {
+    } else if (input === "cosh") {
+      // If user input < (cosh)
+      this.setState({input: cosh(this.state.input).toString()});
+
+    } else if (input === "sinh") {
+      // If user input < (cosh)
+      this.setState({input: sinh(this.state.input).toString()});
+
+    }else if (input === "%") {
       // If user input < (%)
       this.handelPercentage();
 
@@ -210,7 +217,7 @@ class App extends Component {
   // ---------------------
   // Change font size
   // ---------------------
-  shrinkFont = () =>{
+  shrinkFont = () => {
     if(this.state.input.length < 7) {
       return 4;
   } else {
@@ -261,20 +268,6 @@ class App extends Component {
             input: Divide(this.state.sum, this.state.input).toString(),
             sum: Divide(this.state.sum, this.state.input),
             math: "/"
-          });
-          break;
-        case "sinh":
-          this.setState({
-            input: sinh(this.state.input).toString(),
-            sum: sinh(this.state.input),
-            math: "sinh"
-          });
-          break;
-        case "cosh":
-          this.setState({
-            input: sinh(this.state.input).toString(),
-            sum: sinh(this.state.input),
-            math: "cosh"
           });
           break;
         case "^":
