@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 // Components
 import Button from "./components/button";
+import DeleteIcon from "./components/deleteIcon";
+
 
 // Functions
 import Addition from "./functions/addition";
@@ -27,7 +29,7 @@ class App extends Component {
       theme: "red",
     };
 
-    buttons = ["%", "^", "<", "C", "e", "sin","π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+    buttons = ["%", "^", "C", "e", "sin","π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   
 
   // Run when app is loaded
@@ -38,7 +40,6 @@ class App extends Component {
 
   handleInputClick(input) {
         this.setState({whatevz:false});
-
     if (typeof input === "number") {
 
       if (this.state.resetNext) {
@@ -65,11 +66,7 @@ class App extends Component {
       // If user input =
       this.handelEqual();
 
-    } else if (input === "<") {
-      // If user input < (backspace)
-      this.handelBackspace();
-
-    } else if (this.state.input !== "") {
+    }else if (this.state.input !== "") {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
 
@@ -132,7 +129,7 @@ class App extends Component {
   // ---------------------
   // Delete the last number in string, backspace
   // ---------------------
-  handelBackspace() {
+  handelBackspace = (input) => {
     this.setState({input: this.state.input.slice(0, -1)});
   }
 
@@ -265,10 +262,12 @@ class App extends Component {
             <span>{this.handelHistory()}</span>
           </div> */}
           <div className="button-wrapper">
+            <DeleteIcon onClick={this.handelBackspace}/>
             {this.buttons.map((int) => <Button key={int} onClick={this.handleInputClick.bind(this)} math={this.state.math}>{int}</Button>)}
           </div>
         </div>
       </main> 
+
     );
   }
 }
