@@ -150,13 +150,19 @@ class App extends Component {
   // ---------------------
   // Handle math switch: handle math and set new state
   // ---------------------
-  handelMathSwitch(input) {
-    this.handelMath(this.state.math);
-    this.setState({
-      firstEntry: false,
-      math: input,
-      resetNext: true
-    });
+  handelMathSwitch(latestInput) {
+    if (typeof latestInput !== "number" && this.state.math !== latestInput) {
+      this.setState({
+        math: latestInput,
+      });   
+    } else {
+      this.handelMath(this.state.math);
+      this.setState({
+        firstEntry: false,
+        math: latestInput,
+        resetNext: true
+      });
+    }
   }
 
   // ---------------------
