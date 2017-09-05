@@ -102,7 +102,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel comma input, only allow one comma key
+  // Handle comma input, only allow one comma key
   // ---------------------
   handelComma() {
     if (this.state.resetNext || this.state.input === "") {
@@ -134,7 +134,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel equal: handel math, set new state
+  // Handle equal: handle math, set new state
   // ---------------------
   handelEqual() {
     this.handelMath(this.state.math);
@@ -148,7 +148,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel math switch: handel math and set new state
+  // Handle math switch: handle math and set new state
   // ---------------------
   handelMathSwitch(input) {
     this.handelMath(this.state.math);
