@@ -9,15 +9,12 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-<<<<<<< HEAD
 import Rotation from 'react-rotation';
 import sinh from "./functions/sinh";
 import cosh from "./functions/cosh";
 import expo from "./functions/expo";
 
 
-=======
->>>>>>> origin/master
 
 // CSS
 import './App.css';
