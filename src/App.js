@@ -48,7 +48,7 @@ class App extends Component {
       } else {
 
         // Concatenate input string
-        this.setState({input : this.state.input + input.toString()});
+        this.setState({input : this.state.input === "" ?  input.toString() : this.state.input + input.toString()});
       }
 
     } else if (input === "(-)") {
