@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 
 // Components
@@ -8,7 +9,7 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-
+import Rotation from 'react-rotation'
 
 
 
@@ -17,11 +18,8 @@ import './Color.css';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      input: "",
+  state = {
+      input: "0",
       math: null,
       sum: null,
       resetNext: false,
@@ -29,8 +27,9 @@ class App extends Component {
       theme: "red",
     };
 
-    this.buttons = ["C", "(-)", "<", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
-  }
+    buttons = ["C", "(-)", "<", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+  
+
 
   // Run when app is loaded
   componentWillMount() {
@@ -102,14 +101,16 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handle comma input, only allow one comma key
+  // Handel comma input, only allow one comma key
   // ---------------------
   handelComma() {
     if (this.state.resetNext || this.state.input === "") {
       // reset input if resetNext = true
       this.setState({input: "0.", resetNext: false});
     } else {
-      this.setState({input: this.state.input + "."});
+      var reg = new RegExp("[.]");
+      reg= reg.test(this.state.input);
+      this.setState({input: (reg) ? this.state.input.toString() : this.state.input + "."});
     }
   }
 
@@ -134,7 +135,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handle equal: handle math, set new state
+  // Handel equal: handel math, set new state
   // ---------------------
   handelEqual() {
     this.handelMath(this.state.math);
@@ -148,7 +149,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handle math switch: handle math and set new state
+  // Handel math switch: handel math and set new state
   // ---------------------
   handelMathSwitch(input) {
     this.handelMath(this.state.math);
