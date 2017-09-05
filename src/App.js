@@ -9,7 +9,10 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
-import Rotation from 'react-rotation'
+import Rotation from 'react-rotation';
+import sinh from "./functions/sinh";
+import cosh from "./functions/cosh";
+import expo from "./functions/expo";
 
 
 
@@ -27,7 +30,7 @@ class App extends Component {
       theme: "red",
     };
 
-    buttons = ["%", "^", "<", "C", "e", "sin","π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+    buttons = ["%", "^", "<", "C", "e", "sinh", "cosh", "π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   
 
   // Run when app is loaded
@@ -228,6 +231,27 @@ class App extends Component {
             input: Divide(this.state.sum, this.state.input).toString(),
             sum: Divide(this.state.sum, this.state.input),
             math: "/"
+          });
+          break;
+        case "sinh":
+          this.setState({
+            input: sinh(this.state.input).toString(),
+            sum: sinh(this.state.input),
+            math: "sinh"
+          });
+          break;
+        case "cosh":
+          this.setState({
+            input: sinh(this.state.input).toString(),
+            sum: sinh(this.state.input),
+            math: "cosh"
+          });
+          break;
+        case "^":
+          this.setState({
+            input: expo(this.state.sum, this.state.input).toString(),
+            sum: expo(this.state.sum, this.state.input),
+            math: "^"
           });
           break;
         default:
