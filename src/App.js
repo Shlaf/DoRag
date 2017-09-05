@@ -74,7 +74,11 @@ class App extends Component {
     } else if (input === "e") {
       // If user input < (E)
       this.setState({input: Math.E.toString()});
-      
+
+    } else if (input === "%") {
+      // If user input < (%)
+      this.handelPercentage();
+
     } else if (this.state.input !== "") {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
@@ -168,12 +172,33 @@ class App extends Component {
     }
   }
 
+    // ---------------------
+  // Handel percentage
+  // ---------------------
+  handelPercentage() {
+    if (this.state.input !== "") {
+      if (!this.state.sum) {
+        this.setState({input: (this.state.input / 100)});
+      } else {
+        this.setState({input: this.state.sum * (this.state.input / 100)})
+      }
+    }
+  }
+
   // ---------------------
   // Save state to localStorage
   // ---------------------
   postLocalStorage() {
     const jsonString = JSON.stringify(this.state);
     localStorage.setItem('calc', jsonString);
+  }
+
+  // ---------------------
+  // Load state from localStorage
+  // ---------------------
+  getLocalStorage() {
+    const savedState = JSON.parse(localStorage.getItem('calc'));
+    this.setState(savedState);
   }
 
   // ---------------------
@@ -190,14 +215,6 @@ class App extends Component {
       }
   }
 }
-
-  // ---------------------
-  // Load state from localStorage
-  // ---------------------
-  getLocalStorage() {
-    const savedState = JSON.parse(localStorage.getItem('calc'));
-    this.setState(savedState);
-  }
 
   // ---------------------
   // Handle all math, set new state
