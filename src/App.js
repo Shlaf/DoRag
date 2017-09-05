@@ -8,6 +8,9 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
+import Rotation from 'react-rotation'
+
+
 
 import './App.css';
 import './Color.css';
@@ -36,6 +39,7 @@ class App extends Component {
 
 
   handleInputClick(input) {
+        this.setState({whatevz:false});
 
     if (typeof input === "number") {
 
@@ -84,7 +88,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel negative input, only allow one minus key
+  // Handle negative input, only allow one minus key
   // ---------------------
   handelNegative() {
     if (this.state.resetNext) {
@@ -139,6 +143,7 @@ class App extends Component {
       math: "=",
       resetNext: true,
       sum: null,
+      whatevz: true
     });
   }
 
@@ -233,7 +238,7 @@ class App extends Component {
             <div></div>
             <h1>calc</h1>
           </div>
-          <div className="input">
+          <div className={`input ${this.state.whatevz ? "animationz" : ""}`}>
             <span>{this.state.input ? this.state.input : 0}</span>
           </div>
           {/* <div className="history">

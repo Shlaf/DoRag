@@ -5,9 +5,12 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-rotation": "^1.2.1",
     "react-scripts": "0.9.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "react-test-renderer": "^15.6.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
