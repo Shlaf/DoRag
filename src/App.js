@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   // ---------------------
-  // Handel negative input, only allow one minus key
+  // Handle negative input, only allow one minus key
   // ---------------------
   handelNegative() {
     if (this.state.resetNext) {
