@@ -9,13 +9,17 @@ import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
 import Multiply from "./functions/multiply";
 import Divide from "./functions/divide";
+<<<<<<< HEAD
 import Rotation from 'react-rotation';
 import sinh from "./functions/sinh";
 import cosh from "./functions/cosh";
 import expo from "./functions/expo";
 
 
+=======
+>>>>>>> origin/master
 
+// CSS
 import './App.css';
 import './Color.css';
 
@@ -72,6 +76,14 @@ class App extends Component {
       // If user input < (backspace)
       this.handelBackspace();
 
+    } else if (input === "π") {
+      // If user input < (π)
+      this.setState({input: Math.PI.toString()});
+
+    } else if (input === "e") {
+      // If user input < (E)
+      this.setState({input: Math.E.toString()});
+      
     } else if (this.state.input !== "") {
       // If user input +, -, *, /...
       this.setState({resetNext: true});
@@ -177,10 +189,14 @@ class App extends Component {
   // Change font size
   // ---------------------
   shrinkFont = () =>{
-    if(this.state.input.length < 7){
+    if(this.state.input.length < 7) {
       return 4;
-  }else{
+  } else {
+      if (this.state.input.length === 8) {
+        return 3;
+      } else if (this.state.input.length > 9) {
         return 2;
+      }
   }
 }
 
