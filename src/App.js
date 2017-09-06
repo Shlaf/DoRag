@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import Button from "./components/button";
 import DeleteIcon from "./components/deleteIcon";
 
-
 // Functions
 import Addition from "./functions/addition";
 import Subtract from "./functions/subtract";
@@ -14,8 +13,6 @@ import Divide from "./functions/divide";
 import sinh from "./functions/sinh";
 import cosh from "./functions/cosh";
 import expo from "./functions/expo";
-
-
 
 // CSS
 import './App.css';
@@ -32,7 +29,7 @@ class App extends Component {
       theme: "red",
     };
 
-    buttons = ["%", "^", "C", "e", "sinh", "cosh", "π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
+  buttons = ["%", "^", "C", "e", "sinh", "cosh", "π", "/", 1, 2, 3, "*", 4, 5, 6, "-", 7 ,8, 9, "+", 0, ".", "="];
   
 
   // Run when app is loaded
